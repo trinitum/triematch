@@ -76,9 +76,22 @@ func (n *Trie) addChildNode(nn *Trie) {
 	}
 }
 
+// Dump prints the Trie structure to stdout
+func (n *Trie) Dump() {
+	n.dump(0)
+}
+
 func (n *Trie) dump(indent int) {
 	for _, nn := range n.outgoing {
-		fmt.Printf("%*s%d (%c)\n", indent, "", nn.alpha, nn.alpha)
+		c := rune(nn.alpha)
+		if nn.alpha < 0x20 || nn.alpha > 0x7e {
+			c = ' '
+		}
+		m := ""
+		if nn.match != nil {
+			m = " *"
+		}
+		fmt.Printf("%*s0x%02x (%c)%s\n", indent, "", nn.alpha, c, m)
 		nn.dump(indent+1)
 	}
 }

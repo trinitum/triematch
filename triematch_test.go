@@ -44,6 +44,8 @@ func TestLongestMatch(t *testing.T) {
 	trie.AddByteString([]byte{1, 2, 3, 0, 1}, 5)
 	trie.AddByteString([]byte{1, 2, 3, 0, 1, 2, 3}, 6)
 
+	// trie.Dump()
+
 	res := trie.LongestMatch("fooBar")
 	if ! cmpMatch(res, 2) {
 		t.Errorf("match for fooBar is %v", res)
